@@ -29,7 +29,14 @@ class BookController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->validate([
+            'title' => 'required|string|max:150',
+            'author' => 'required|string|max:100',
+            'price' => 'required|numeric|min:0|max:99999999.99',
+            'available' => 'required|boolean',
+        ]);
+        Book::create($data);
+        return redirect()->route('books.index')->with('success', 'Book created successfully.');
     }
 
     /**
@@ -53,7 +60,14 @@ class BookController extends Controller
      */
     public function update(Request $request, Book $book)
     {
-        //
+        $data = $request->validate([
+            'title' => 'required|string|max:150',
+            'author' => 'required|string|max:100',
+            'price' => 'required|numeric|min:0|max:99999999.99',
+            'available' => 'required|boolean',
+        ]);
+        $book->update($data);
+        return redirect()->route('books.index')->with('success', 'Book updated successfully.');
     }
 
     /**
@@ -61,6 +75,7 @@ class BookController extends Controller
      */
     public function destroy(Book $book)
     {
-        //
+        $book->delete();
+        return redirect()->route('books.index')->with('success', 'Book deleted successfully.');
     }
 }

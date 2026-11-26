@@ -1,7 +1,10 @@
 <?php
-
+use App\Http\Controllers\BookController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', fn () => redirect()->route('books.index'));
+Route::resource('books', BookController::class)
+    ->only(['index', 'show']);
+    Route::resource('books', BookController::class)
+    ->except(['index', 'show']);
+
