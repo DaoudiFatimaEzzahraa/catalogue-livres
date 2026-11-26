@@ -1,0 +1,22 @@
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Model;
+
+class Book extends Model
+{
+    protected $fillable = [
+        'title',
+        'author',
+        'price',
+        'available',
+    ];
+    protected function casts(): array
+    {
+        return [
+            'available' => 'boolean',
+            'price' => 'decimal:2',
+        ];
+    }
+}
